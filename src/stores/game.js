@@ -19,6 +19,37 @@ function loadState() {
   }
 }
 
+/**
+ * Returns a Set of player names who are dead at the given phase index,
+ * by replaying deaths and executions from phase 0 through phaseIndex.
+ */
+export function getDeadPlayersAtPhase(phases, phaseIndex) {
+  const dead = new Set();
+  for (let i = 0; i <= phaseIndex && i < phases.length; i++) {
+    const phase = phases[i];
+    for (const name of phase.deaths) {
+      dead.add(name);
+    }
+    for (const nom of phase.nominations) {
+      if (nom.outcome === 'executed') {
+        dead.add(nom.nominated);
+      }
+    }
+  }
+  return dead;
+}
+
+/**
+ * Returns players with phase-aware alive status.
+ */
+export function getPlayersAtPhase(players, phases, phaseIndex) {
+  const dead = getDeadPlayersAtPhase(phases, phaseIndex);
+  return players.map((p) => ({
+    ...p,
+    alive: !dead.has(p.name),
+  }));
+}
+
 export function createGameStore() {
   const initial = loadState() || { ...INITIAL_STATE, players: [], phases: [] };
   const { subscribe, set, update } = writable(initial);

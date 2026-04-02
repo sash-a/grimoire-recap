@@ -36,7 +36,7 @@
 <div class="night-phase">
   <div class="label">Players (night order)</div>
 
-  {#each orderedPlayers() as { player, fields }}
+  {#each orderedPlayers as { player, fields }}
     <PlayerCard
       {player}
       {phaseIndex}
@@ -46,7 +46,7 @@
     />
   {/each}
 
-  {#if orderedPlayers().length === 0}
+  {#if orderedPlayers.length === 0}
     <p class="empty-msg">No roles with night actions for this night.</p>
   {/if}
 
