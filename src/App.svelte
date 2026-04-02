@@ -3,6 +3,7 @@
   import Setup from './components/Setup.svelte';
   import PhaseBar from './components/PhaseBar.svelte';
   import NightPhase from './components/NightPhase.svelte';
+  import DayPhase from './components/DayPhase.svelte';
 
   let state = $state({ started: false, phases: [], currentPhaseIndex: -1, players: [] });
 
@@ -27,9 +28,11 @@
         players={state.players}
       />
     {:else if currentPhase?.type === 'day'}
-      <p style="padding: 16px; color: var(--text-secondary);">
-        Day {currentPhase.number} — day phase coming next.
-      </p>
+      <DayPhase
+        phase={currentPhase}
+        phaseIndex={state.currentPhaseIndex}
+        players={state.players}
+      />
     {/if}
   </main>
 {/if}
