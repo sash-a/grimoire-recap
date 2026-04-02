@@ -14,10 +14,6 @@
     game.addDeath(phaseIndex, playerName);
   }
 
-  const alivePlayers = $derived(players.filter((p) => p.alive));
-  const deadNotListed = $derived(
-    players.filter((p) => !p.alive && !phase.deaths.includes(p.name))
-  );
 </script>
 
 <div class="day-phase">

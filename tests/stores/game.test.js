@@ -161,12 +161,22 @@ describe('game store', () => {
       expect(get(store).phases[1].nominations[0].outcome).toBe('executed');
     });
 
-    it('addDeath records a death in a phase', () => {
+    it('addDeath records a death in a phase and marks player dead', () => {
       store.addPlayer('Alice', 'fortuneTeller');
       store.startGame();
       store.addPhase();
       store.addDeath(1, 'Alice');
       expect(get(store).phases[1].deaths).toEqual(['Alice']);
+      expect(get(store).players[0].alive).toBe(false);
+    });
+  });
+
+  describe('duplicate prevention', () => {
+    it('ignores duplicate player names', () => {
+      store.addPlayer('Alice', 'fortuneTeller');
+      store.addPlayer('Alice', 'imp');
+      expect(get(store).players).toHaveLength(1);
+      expect(get(store).players[0].role).toBe('fortuneTeller');
     });
   });
 

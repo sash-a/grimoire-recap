@@ -1,6 +1,6 @@
 <script>
   import { game } from '../stores/game.js';
-  import { ROLES, getRolesForTeam } from '../data/troubleBrewing.js';
+  import { ROLES } from '../data/troubleBrewing.js';
 
   let playerName = $state('');
   let selectedRole = $state('');

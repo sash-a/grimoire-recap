@@ -32,10 +32,13 @@ export function createGameStore() {
   });
 
   function addPlayer(name, role) {
-    update((s) => ({
-      ...s,
-      players: [...s.players, { name, role, alive: true, conditions: [] }],
-    }));
+    update((s) => {
+      if (s.players.some((p) => p.name === name)) return s;
+      return {
+        ...s,
+        players: [...s.players, { name, role, alive: true, conditions: [] }],
+      };
+    });
   }
 
   function removePlayer(name) {
@@ -167,7 +170,10 @@ export function createGameStore() {
         if (i !== phaseIndex) return phase;
         return { ...phase, deaths: [...phase.deaths, playerName] };
       });
-      return { ...s, phases };
+      const players = s.players.map((p) =>
+        p.name === playerName ? { ...p, alive: false } : p
+      );
+      return { ...s, phases, players };
     });
   }
 

@@ -8,7 +8,7 @@
   const isFirstNight = $derived(phase.number === 1);
   const nightOrder = $derived(isFirstNight ? FIRST_NIGHT_ORDER : OTHER_NIGHT_ORDER);
 
-  const orderedPlayers = $derived(() => {
+  const orderedPlayers = $derived.by(() => {
     const roleToPlayer = {};
     for (const p of players) {
       roleToPlayer[p.role] = p;
