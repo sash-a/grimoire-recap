@@ -1,43 +1,30 @@
-# Svelte + Vite
+# Grimoire Recap
 
-This template should help get you started developing with Svelte in Vite.
+A mobile-first web app for Blood on the Clocktower storytellers to track what happens during a game, so you can actually explain it to the players at the end.
 
-## Recommended IDE Setup
+## What it does
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+As the storyteller you have the grimoire to run the game, but by the end it's hard to remember every piece of information you gave out. This app lets you record it as you go:
 
-## Need an official Svelte framework?
+- **Setup** — Add players and assign roles (Trouble Brewing edition)
+- **Night phases** — Track what you told each player: who the Fortune Teller asked about, what number the Empath got, who the Poisoner targeted, etc. Role-specific input fields keep it fast.
+- **Day phases** — Record deaths, nominations, and execution outcomes
+- **Status tracking** — Mark players as poisoned, drunk, or dead. Status is phase-aware so you can look back and see who was alive at any point.
+- **Freeform notes** — Add notes per phase for key moments, bluffs, accusations
+- **Game summary** — One-tap recap that compiles everything chronologically
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+## Usage
 
-## Technical considerations
+Open https://sash-a.github.io/grimoire-recap/ on your phone. Add to home screen for a full-screen app experience that works offline.
 
-**Why use this over SvelteKit?**
+## Tech
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+Svelte 5, Vite, PWA with service worker. No backend — everything stays in your browser's session storage. Closing the tab clears the game.
 
-This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+## Development
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
-
-**Why include `.vscode/extensions.json`?**
-
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
-
-**Why enable `checkJs` in the JS template?**
-
-It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```js
-// store.js
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+```bash
+npm install
+npm run dev
+npm test
 ```
